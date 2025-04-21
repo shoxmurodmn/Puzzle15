@@ -4,24 +4,25 @@ import "./game.css";
 import { FaHourglassHalf } from "react-icons/fa";
 import { TbHandClick } from "react-icons/tb";
 import { LuRefreshCcwDot } from "react-icons/lu";
-import Confetti from 'react-confetti'
+import Confetti from "react-confetti";
+import axios from "axios"; 
 
 const generateTiles = () => {
   const tiles = [...Array(15).keys()].map((n) => n + 1);
   tiles.push(null);
   return shuffleArray(tiles);
-};   // 15 gacha array hosl qiladi
+}; // 15 gacha array hosl qiladi
 
 const shuffleArray = (array) => {
-  let shuffled = [...array]; 
+  let shuffled = [...array];
   do {
     for (let i = shuffled.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-    }  
+    }
   } while (!isSolvable(shuffled));
-  return shuffled; 
-}; 
+  return shuffled;
+};
 
 const isSolvable = (tiles) => {
   let inversions = 0;
@@ -48,8 +49,7 @@ const Game = () => {
   const [moves, setMoves] = useState(0);
   const [seconds, setSeconds] = useState(0);
   const [started, setStarted] = useState(false);
-  const [ bayram, setBayram ] = useState(false)
-  
+  const [bayram, setBayram] = useState(false);
 
   const handleClick = (index) => {
     if (!started) return; // 🚫 agar boshlanmagan bo‘lsa, harakat qilish mumkin emas
@@ -82,23 +82,21 @@ const Game = () => {
     setSeconds(0);
   };
 
-useEffect(()=>{
-  if (won) {
-    const fiveSecondRunner = () => {
-      setBayram(true)
-      let count = 0;
-      const interval = setInterval(() => {
-        count++;
-        if (count === 5) {
-          clearInterval(interval);
-          setBayram(false)
-        }
-      }, 1000);
-    };
-  }
-},[won])
-
-
+  useEffect(() => {
+    if (won) {
+      const fiveSecondRunner = () => {
+        setBayram(true);
+        let count = 0;
+        const interval = setInterval(() => {
+          count++;
+          if (count === 5) {
+            clearInterval(interval);
+            setBayram(false);
+          }
+        }, 1000);
+      };
+    }
+  }, [won]);
 
   useEffect(() => {
     let timer;
@@ -111,64 +109,122 @@ useEffect(()=>{
   }, [started, won]);
 
 
-  
 
+// bakeen malumot set qilish
+
+useEffect(()=>{
+
+},[])
+
+  const [mode, setMode] = useState("login");
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    password: ""
+  })
+
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      if (mode === "login") {
+        const response = await axios.post("https://your-backend-api.com/login", {
+          email: formData.email,
+          password: formData.password
+        });
+        console.log("Login muvaffaqiyatli:", response.data);
+      } else {
+        const response = await axios.post("https://your-backend-api.com/register", {
+          username: formData.username,
+          email: formData.email,
+          password: formData.password
+        });
+        console.log("Registratsiya muvaffaqiyatli:", response.data);
+      }
+    } catch (error) {
+      console.error("Xatolik:", error.response ? error.response.data : error.message);
+    }
+  };
+
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     // GET so'rovini yuborish (params shart emas)
+  //     const response = await axios.get("https://your-backend-api.com/data");
+  //     console.log("Serverdan kelgan javob:", response.data);
+  //     setResponseData(response.data); // Javobni saqlash
+  //   } catch (error) {
+  //     console.error("Xatolik:", error.response ? error.response.data : error.message);
+  //   }
+  // };
+
+  
   return (
     <div className="puzzle-container">
-     {bayram ? <Confetti style={{width:"100%"}}/>: " "}
-
-      <h1 className="title_name">Puzzle</h1>
+      {bayram ? <Confetti style={{ width: "100%" }} /> : " "}
 
       {!started ? (
         <button className="start-button" onClick={startGame}>
-          Boshlash
+          start
         </button>
       ) : (
         <>
           <div className="data-game">
-            {bayram && won && <Confetti
-              className="bayram"
-            />}
+            {bayram && won && <Confetti className="bayram" />}
             <p className="data-game_iconst">
-              
               <div className="iconst">
                 <TbHandClick />
               </div>
               <span> {moves}</span>
             </p>
             <p className="data-game_iconst">
-              
               <div className="iconst">
                 <FaHourglassHalf />
               </div>
               <span> {seconds} </span>
             </p>
-            <p className="data-game_iconst" onClick={ ()=>startGame()}>
-              
+            <p className="data-game_iconst" onClick={() => startGame()}>
               <div className="iconst">
-              <LuRefreshCcwDot />
+                <LuRefreshCcwDot />
               </div>
-              
             </p>
           </div>
           <div className="grid">
             {tiles.map((tile, index) => {
-             
-              
-               return <div
-                key={index}
-                className={`tile ${tile === null ? "empty" : ""}`}
-                onClick={() => handleClick(index)}
-              >
-                {tile}
-              </div>
+              return (
+                <div
+                  key={index}
+                  className={`tile ${tile === null ? "empty" : ""}`}
+                  onClick={() => handleClick(index)}
+                >
+                  {tile}
+                </div>
+              );
             })}
+          </div>
+          <div className="data-game">
+            <div className="data-game_iconst_end btn">
+              <div className="iconst">
+                <TbHandClick />
+              </div>
+              <span></span>
+            </div>
+
+            <div className="data-game_iconst_end btn">
+              <div className="iconst">
+                <FaHourglassHalf />
+              </div>
+              <span>  </span>
+            </div>
           </div>
           {won && (
             <p className="win-message">🎉 Tabriklaymiz! Siz yutdingiz!</p>
           )}
-
-        
         </>
       )}
     </div>

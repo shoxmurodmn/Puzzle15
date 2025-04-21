@@ -1,0 +1,23 @@
+.avatar_user{
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.img_randum{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: aqua;
+    border-radius: 50%;
+}
+.Tabel_nuber{
+    font-weight: 700;
+    color: rgba(0, 0, 0, 0.966);
+    padding: 10px;
+}
+
+.tr_stayle{
+    padding: 20px;
+    font-size: 24px;
+}

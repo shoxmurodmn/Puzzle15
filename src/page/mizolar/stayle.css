@@ -1,0 +1,111 @@
+
+
+
+.user-table-container {
+    margin-top: 50px;
+  }
+  
+  .user-table-wrapper {
+    background-color: white;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    border-radius: 16px;
+    padding: 20px;
+    width: calc(100% - 60px);
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .user-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    text-align: left;
+  }
+  
+  .user-table thead {
+    border-bottom: 1px solid #d1d5db;
+    color: #374151;
+  }
+  
+  .user-table th,
+  .user-table td {
+    /* padding: 12px; */
+    
+  }
+  
+  .user-table td img {
+    width: 32px;
+    height: 32px;
+    border-radius: 9999px;
+  }
+  
+  .user-table .status-badge {
+    background-color: #ef4444;
+    color: white;
+    font-size: 12px;
+    padding: 4px 12px;
+    border-radius: 9999px;
+  }
+  
+  .user-table .action-btn {
+    color: #4f46e5;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .user-table .action-btn:hover {
+    color: #4338ca;
+  }
+  
+  .pagination {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    margin-top: 24px;
+    
+    width: 100%;
+    max-width: 1100px;
+    color: #000000;
+  }
+  
+  /* .pagination button:disabled {
+    opacity: 0.5;
+  } */
+  
+  .tr_stayle{
+    vertical-align: center;
+    align-content: center;
+    font-weight: 500;
+    color: #374151;
+  }
+
+  .avatar_user_list{
+    display: flex;
+      
+        align-items: center;
+        gap: 10px;
+  }
+
+  .next_Boton{
+    border: none;
+    background-color: #4e46e563;
+    padding: 12px 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all .1S ease ;
+    
+  }
+
+  .next_Boton:active{
+    transform: scale(.95);
+  }
+
+  .iconst{
+font-size: 24px;
+  }
+
+  .data-game_iconst{
+    width: max-content;
+    padding: 8px 8px;
+  }

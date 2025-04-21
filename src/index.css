@@ -3,7 +3,7 @@ body {
   margin: 0;
   padding: 0;
   background-image: url("../src/asets/gish.jpg");
-  background-repeat: no-repeat;
+  /* background-repeat: no-repeat; */
   height: 100vh;  
   background-size: cover;
   background-position: center;

@@ -1,10 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+
 import Game from './page/game/game';
+import Home from "./page/home/home";
+import UserTable from "./page/mizolar";
+
 
 function App() {
   return (
-    <Game/>
+    <BrowserRouter>
+    
+    <Routes>
+        <Route element={<Home/>}>
+           
+            <Route path="/" element={ <Game />}> </Route>
+            <Route path="/result" element={<UserTable/>}></Route>
+
+        </Route>
+      </Routes>
+                             
+
+    </BrowserRouter>
   );
 }
 
