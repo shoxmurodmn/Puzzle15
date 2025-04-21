@@ -3,7 +3,6 @@ import "./game.css";
 
 import { FaHourglassHalf } from "react-icons/fa";
 import { TbHandClick } from "react-icons/tb";
-// import { useWindowSize } from 'react-use'
 import { LuRefreshCcwDot } from "react-icons/lu";
 import Confetti from 'react-confetti'
 
@@ -19,10 +18,10 @@ const shuffleArray = (array) => {
     for (let i = shuffled.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-    }  //Shuffle qilish (tasodifiy almashtirish)
-  } while (!isSolvable(shuffled)); //Shuffle qil, yechiladigan bo‘lguncha
-  return shuffled;  // Yigiladigan holatdagi aralashma qaytariladi
-}; // yig'sa bo'ladigan qilish
+    }  
+  } while (!isSolvable(shuffled));
+  return shuffled; 
+}; 
 
 const isSolvable = (tiles) => {
   let inversions = 0;
@@ -50,6 +49,7 @@ const Game = () => {
   const [seconds, setSeconds] = useState(0);
   const [started, setStarted] = useState(false);
   const [ bayram, setBayram ] = useState(false)
+  
 
   const handleClick = (index) => {
     if (!started) return; // 🚫 agar boshlanmagan bo‘lsa, harakat qilish mumkin emas
@@ -117,7 +117,7 @@ useEffect(()=>{
     <div className="puzzle-container">
      {bayram ? <Confetti style={{width:"100%"}}/>: " "}
 
-      <h1 className="title_name">15 O‘yin</h1>
+      <h1 className="title_name">Puzzle</h1>
 
       {!started ? (
         <button className="start-button" onClick={startGame}>
