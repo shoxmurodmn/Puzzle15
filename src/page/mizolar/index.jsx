@@ -16,17 +16,17 @@ const users =[
     id: 1,
     name: "Murod",
     avatar: "https://i.pravatar.cc/40?img=1", // Rasm link
-    category: "—", // Tasnifi yo‘q
-    phone: "+99",
-    status: "1",
+    category: "04", // Tasnifi yo‘q
+    phone: "03",
+    status: "14",
   },
   {
     id: 2,
     name: "Iroda",
     avatar: "https://i.pravatar.cc/40?img=2",
-    category: "Botix",
-    phone: "97",
-    status: "1",
+    category: "01",
+    phone: "05",
+    status: "23",
   },
 ];
 

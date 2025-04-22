@@ -24,7 +24,7 @@ const MIjozlarList =(value)=> {
                 <td>{users.status}</td>
                 <td>{users.phone}</td>
                 <td>
-                  <span> {users.status}</span>
+                  <span> {users.category}</span>
                 </td>
                <td>{users.name}</td>
                </tr>
