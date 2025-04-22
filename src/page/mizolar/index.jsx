@@ -14,7 +14,7 @@ import { MdOutlinePhonelink } from "react-icons/md";
 const users =[
   {
     id: 1,
-    name: "Sodiqov Ilhom",
+    name: "Murod",
     avatar: "https://i.pravatar.cc/40?img=1", // Rasm link
     category: "—", // Tasnifi yo‘q
     phone: "+99",
@@ -22,7 +22,7 @@ const users =[
   },
   {
     id: 2,
-    name: "inobat opa",
+    name: "Iroda",
     avatar: "https://i.pravatar.cc/40?img=2",
     category: "Botix",
     phone: "97",

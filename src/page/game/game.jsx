@@ -11,7 +11,8 @@ const generateTiles = () => {
   const tiles = [...Array(15).keys()].map((n) => n + 1);
   tiles.push(null);
   return shuffleArray(tiles);
-}; // 15 gacha array hosl qiladi
+}; 
+
 
 const shuffleArray = (array) => {
   let shuffled = [...array];
@@ -112,10 +113,6 @@ const Game = () => {
 
 // bakeen malumot set qilish
 
-useEffect(()=>{
-
-},[])
-
   const [mode, setMode] = useState("login");
   const [formData, setFormData] = useState({
     username: "",
@@ -124,9 +121,9 @@ useEffect(()=>{
   })
 
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  // const handleChange = (e) => {
+  //   setFormData({ ...formData, [e.target.name]: e.target.value });
+  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -150,20 +147,6 @@ useEffect(()=>{
     }
   };
 
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     // GET so'rovini yuborish (params shart emas)
-  //     const response = await axios.get("https://your-backend-api.com/data");
-  //     console.log("Serverdan kelgan javob:", response.data);
-  //     setResponseData(response.data); // Javobni saqlash
-  //   } catch (error) {
-  //     console.error("Xatolik:", error.response ? error.response.data : error.message);
-  //   }
-  // };
-
-  
   return (
     <div className="puzzle-container">
       {bayram ? <Confetti style={{ width: "100%" }} /> : " "}
