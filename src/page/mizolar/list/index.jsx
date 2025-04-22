@@ -26,7 +26,7 @@ const MIjozlarList =(value)=> {
                 <td>
                   <span> {users.status}</span>
                 </td>
-               <td>murod</td>
+               <td>{users.name}</td>
                </tr>
     
   )
