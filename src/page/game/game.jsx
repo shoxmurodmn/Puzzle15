@@ -6,6 +6,9 @@ import { TbHandClick } from "react-icons/tb";
 import { LuRefreshCcwDot } from "react-icons/lu";
 import Confetti from "react-confetti";
 import axios from "axios"; 
+import aidoSound  from '../../adio/adio.mp3'
+import erorrSound  from '../../adio/erorr.mp3'
+import finshSound  from '../../adio/finsh.mp3'
 
 const generateTiles = () => {
   const tiles = [...Array(15).keys()].map((n) => n + 1);
@@ -51,10 +54,14 @@ const Game = () => {
   const [seconds, setSeconds] = useState(0);
   const [started, setStarted] = useState(false);
   const [bayram, setBayram] = useState(false);
-
+  const audio = new Audio(aidoSound)
+  const errorA = new Audio(erorrSound)
+  const finsh = new Audio(finshSound)
+  
   const handleClick = (index) => {
     if (!started) return; // 🚫 agar boshlanmagan bo‘lsa, harakat qilish mumkin emas
-
+    if(!bayram){
+    
     const emptyIndex = tiles.indexOf(null);
 
     const isAdjacent =
@@ -71,47 +78,36 @@ const Game = () => {
       setTiles(newTiles);
       setMoves((m) => m + 1);
       setWon(isSolved(newTiles));
-    }
+      audio.play();
+    }else errorA.play();}
+
   };
 
   const startGame = () => {
     setTiles(generateTiles());
     setStarted(true);
     setWon(false);
-    // setTiles([]);
+    setBayram(false); 
     setMoves(0);
     setSeconds(0);
   };
 
+
+
   useEffect(() => {
     if (won) {
-      const fiveSecondRunner = () => {
-        setBayram(true);
-        let count = 0;
-        const interval = setInterval(() => {
-          count++;
-          if (count === 5) {
-            clearInterval(interval);
-            setBayram(false);
-          }
-        }, 1000);
-      };
+      setBayram(true);
+      let count = 0;
+      const interval = setInterval(() => {
+        count++;
+        if (count === 5) {
+          clearInterval(interval);
+          setBayram(false);
+        }
+      }, 1000);
+      return () => clearInterval(interval); // tozalash
     }
   }, [won]);
-
-  useEffect(() => {
-    let timer;
-    if (started && !won) {
-      timer = setInterval(() => {
-        setSeconds((prev) => prev + 1);
-      }, 1000);
-    }
-    return () => clearInterval(timer);
-  }, [started, won]);
-
-
-
-// bakeen malumot set qilish
 
   const [mode, setMode] = useState("login");
   const [formData, setFormData] = useState({
@@ -120,11 +116,17 @@ const Game = () => {
     password: ""
   })
 
+  useEffect(() => {
+    let timer;
+    if (started && !won) {
+      timer = setInterval(() => {
+        setSeconds((prev) => prev + 1);
+      }, 1000);
+    }
+    return () => clearInterval(timer); // tozalash
+  }, [started, won]);
 
-  // const handleChange = (e) => {
-  //   setFormData({ ...formData, [e.target.name]: e.target.value });
-  // };
-
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -147,9 +149,13 @@ const Game = () => {
     }
   };
 
+  if (bayram) {
+    finsh.play()
+  }
+
   return (
     <div className="puzzle-container">
-      {bayram ? <Confetti style={{ width: "100%" }} /> : " "}
+      {bayram && <Confetti style={{ width: "100%", height: "100%" }} />}
 
       {!started ? (
         <button className="start-button" onClick={startGame}>
@@ -158,7 +164,7 @@ const Game = () => {
       ) : (
         <>
           <div className="data-game">
-            {bayram && won && <Confetti className="bayram" />}
+           
             <p className="data-game_iconst">
               <div className="iconst">
                 <TbHandClick />
